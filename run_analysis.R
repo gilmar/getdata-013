@@ -44,6 +44,7 @@ test$subject <- subject_test$V1
 #Merges the training and the test sets to create one data set.
 fulldataset <- rbind(train,test)
 
-dataset_grouped = fulldataset
-
+dataset_grouped = group_by(fulldataset,subject,activity_label)
+write.table(select(ddply(fulldataset, "subject", colwise(mean)),-c(activity_code,activity_label)),"./data/subject.txt",row.name=FALSE)
+write.table(select(ddply(fulldataset, "activity_label", colwise(mean)),-c(activity_code,subject)),"./data/activity.txt",row.name=FALSE)
 
