@@ -40,3 +40,7 @@ test$subject <- subject_test$V1
 #Merges the training and the test sets to create one data set.
 fulldataset <- rbind(train,test)
 
+#Extracts only the measurements on the mean and standard deviation for each measurement.
+dataset <- fulldataset[,cbind(grep("mean()", names(fulldataset),fixed=TRUE),grep("std()", names(fulldataset),fixed=TRUE))]
+
+
