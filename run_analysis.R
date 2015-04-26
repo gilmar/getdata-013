@@ -25,6 +25,10 @@ names(y_train) <- c("activity_code")
 names(y_test) <- c("activity_code")
 names(activity_labels) <- c("activity_code","activity_label")
 
+#Extracts only the measurements on the mean and standard deviation for each measurement.
+X_train <- X_train[,cbind(grep("mean()", names(X_train),fixed=TRUE),grep("std()", names(X_train),fixed=TRUE))]
+X_test <- X_test[,cbind(grep("mean()", names(X_test),fixed=TRUE),grep("std()", names(X_test),fixed=TRUE))]
+
 #Uses descriptive activity names to name the activities in the data set
 y_train$activity_label = activity_labels[match(y_train$activity_code,activity_labels$activity_code),"activity_label"]
 y_test$activity_label = activity_labels[match(y_test$activity_code,activity_labels$activity_code),"activity_label"]
@@ -40,7 +44,6 @@ test$subject <- subject_test$V1
 #Merges the training and the test sets to create one data set.
 fulldataset <- rbind(train,test)
 
-#Extracts only the measurements on the mean and standard deviation for each measurement.
-dataset <- fulldataset[,cbind(grep("mean()", names(fulldataset),fixed=TRUE),grep("std()", names(fulldataset),fixed=TRUE))]
+dataset_grouped = fulldataset
 
 
