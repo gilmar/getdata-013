@@ -1,5 +1,6 @@
 library(dplyr)
 library(plyr)
+library(reshape2)
 
 setwd('~/courses/coursera/getdata-013/getdata-013-project')
 if(!file.exists("./data")){dir.create("./data")}
@@ -44,7 +45,7 @@ test$subject <- subject_test$V1
 #Merges the training and the test sets to create one data set.
 fulldataset <- rbind(train,test)
 
-dataset_grouped = group_by(fulldataset,subject,activity_label)
-write.table(select(ddply(fulldataset, "subject", colwise(mean)),-c(activity_code,activity_label)),"./data/subject.txt",row.name=FALSE)
-write.table(select(ddply(fulldataset, "activity_label", colwise(mean)),-c(activity_code,subject)),"./data/activity.txt",row.name=FALSE)
+melted_dataset<-melt(fulldataset,id=c("subject","activity_label"),measure.vars=head(colnames(fulldataset),n=-3))
+final_dataset<-dcast(melted_dataset, subject+activity_label~variable,mean)
 
+table.write(final_dataset,"./data/final.txt",row.name=FALSE)
