@@ -8,7 +8,7 @@ Make sure you have installed the following R packages:
 
 ## Repo structure
 
-CodeBook.md - Codebook describing the resulting dataset 
-data - Directory to store datafiles 
-README.md  - This readme
-run_analysis.R - Main scritpt
+- CodeBook.md :  Codebook describing the resulting dataset 
+- data : Directory to store datafiles 
+- README.md  : This readme
+- run_analysis.R : Main scritpt
