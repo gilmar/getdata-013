@@ -48,4 +48,4 @@ fulldataset <- rbind(train,test)
 melted_dataset<-melt(fulldataset,id=c("subject","activity_label"),measure.vars=head(colnames(fulldataset),n=-3))
 final_dataset<-dcast(melted_dataset, subject+activity_label~variable,mean)
 
-table.write(final_dataset,"./data/final.txt",row.name=FALSE)
+write.table(final_dataset,"./data/final.txt",row.name=FALSE)
